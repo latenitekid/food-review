@@ -1,0 +1,36 @@
+# Python
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.env
+*.venv
+*.egg-info/
+**/dist/
+**/build/
+*.log
+
+# Virtual Environment
+**/.env/
+**/.venv/
+**/env/
+**/venv/
+**/ENV/
+**/VENV/
+
+# Angular
+**/node_modules/
+**/dist/
+**/tmp/
+**/out-tsc/
+**/coverage/
+**/.angular/
+*.log
+
+# OS files
+**/.DS_Store
+**/Thumbs.db
+
+# IDE files
+.vscode/

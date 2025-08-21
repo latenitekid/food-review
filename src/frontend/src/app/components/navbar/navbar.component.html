@@ -1,0 +1,36 @@
+<div class="navbar bg-neutral text-neutral-content">
+  <div class="flex-none">
+    <a class="btn btn-ghost text-xl" routerLink="/">Nick's Food Reviews</a>
+  </div>
+  <div class="flex-1">
+    <ul class="menu menu-horizontal px-1">
+      <li>
+        <a routerLink="/">Home</a>
+      </li>
+      <li>
+        <a routerLink="/restaurants" routerLinkActive="active">Restaurants</a>
+      </li>
+      <li>
+        <a routerLink="/hof" routerLinkActive="active">Hall of Fame</a>
+      </li>
+      <li>
+        <a routerLink="/about" routerLinkActive="active">About</a>
+      </li>
+      <li *ngIf="auth.isAuthenticated$ | async">
+        <a routerLink="/your-reviews" routerLinkActive="active">Your Reviews</a>
+      </li>
+      <li *ngIf="auth.isAuthenticated$ | async">
+        <a routerLink="/profile" routerLinkActive="active">Profile</a>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="!(auth.isAuthenticated$ | async)" class="flex-none">
+    <button class="btn btn-primary" (click)="login()">Login</button>
+  </div>
+  <div *ngIf="auth.user$ | async as user" class="flex-none avatar">
+    <div class="w-10 rounded-full">
+      <img [src]="user.picture" alt="{{ user.name }}" />
+    </div>
+    <button class="btn btn-ghost" (click)="logout()">Logout</button>
+  </div>
+</div>

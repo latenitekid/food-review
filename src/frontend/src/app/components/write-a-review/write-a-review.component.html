@@ -1,0 +1,56 @@
+<div class="flex justify-center w-full">
+  * Required
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">* Name of restaurant</legend>
+    <input
+      type="text"
+      class="input"
+      placeholder="McDonalds"
+      [(ngModel)]="newReviewDetails.restaurantName"
+    />
+    <legend class="fieldset-legend">Review headline</legend>
+    <input
+      type="text"
+      class="input"
+      placeholder="it was fire!!"
+      [(ngModel)]="newReviewDetails.headline"
+    >
+    <legend class="fieldset-legend">Overall meal rating</legend>
+    <div>
+      <span
+        *ngFor="let index of ratingBurgers"
+        [class]="getRatingBurgerClass(index)"
+        (mouseover)="hoveredBurger = index"
+        (mouseleave)="hoveredBurger = 0"
+        (click)="newReviewDetails.burgerRating = index"
+      >
+        🍔
+      </span>
+    </div>
+    <span
+      *ngIf="hoveredBurger || newReviewDetails.burgerRating"
+      class="rating-burger-message"
+      >Rating: {{ hoveredBurger || newReviewDetails.burgerRating }} out of
+      10</span
+    >
+    <legend class="fieldset-legend">Date of patronage</legend>
+    <input class="input" type="date" [(ngModel)]="newReviewDetails.date">
+    <legend class="fieldset-legend">What did you get?</legend>
+    <input class="input" [(ngModel)]="newReviewDetails.mealItems">
+    <legend class="fieldset-legend">How much did you spend?</legend>
+    <label class="input">
+      $
+      <input class="grow" type="number" step="0.01" [(ngModel)]="newReviewDetails.mealCost">
+    </label>
+    <legend class="fieldset-legend">Tell us the details!</legend>
+    <textarea class="textarea" [(ngModel)]="newReviewDetails.reviewText"></textarea>
+  <div class="flex-columnn">
+    <button (click)="submitReview()" class="btn btn-primary mt-5">Submit</button>
+  </div>
+  </fieldset>
+  <div class="divider divider-horizontal"></div>
+  <div class="flex-column">
+    <div class="flex-none text-center">Review Preview</div>
+    <app-review-card class="flex-1" [reviewDetails]="newReviewDetails"></app-review-card>
+  </div>
+</div>
