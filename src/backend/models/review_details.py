@@ -6,7 +6,7 @@ class NewReviewDetails(BaseModel):
   restaurant_name: str = Field(alias='restaurantName')
   headline: str = Field(alias='headline')
   burger_rating: int = Field(alias='burgerRating')
-  date: date = Field(alias='date')
+  review_date: date = Field(alias='date')
   meal_items: str = Field(alias='mealItems')
   meal_cost: float = Field(alias='mealCost')
   review_text: str = Field(alias='reviewText')
