@@ -1,15 +1,24 @@
 from datetime import date
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
+from .model_utils import to_camel
 
 class NewReviewDetails(BaseModel):
-  user_id: int = Field(alias='userId')
-  restaurant_name: str = Field(alias='restaurantName')
-  headline: str = Field(alias='headline')
-  burger_rating: int = Field(alias='burgerRating')
-  review_date: date = Field(alias='date')
-  meal_items: str = Field(alias='mealItems')
-  meal_cost: float = Field(alias='mealCost')
-  review_text: str = Field(alias='reviewText')
+  class Config:
+    validate_by_name = True
+    alias_generator = to_camel
+
+  user_id: int
+  restaurant_name: str
+  headline: str
+  burger_rating: int
+  review_date: date
+  meal_items: str
+  meal_cost: float
+  review_text: str
 
 class ReviewDetails(NewReviewDetails):
-  id: int = Field(alias='id')
+  class Config:
+    validate_by_name = True
+    alias_generator = to_camel
+
+  id: int

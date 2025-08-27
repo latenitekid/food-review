@@ -21,7 +21,7 @@ def add_new_review(review: NewReviewDetails):
           "restaurant_name": review.restaurant_name,
           "headline": review.headline,
           "rating": review.burger_rating,
-          "date": review.date,
+          "date": review.review_date,
           "meal_items": review.meal_items,
           "meal_cost": review.meal_cost,
           "review_text": review.review_text
@@ -34,9 +34,8 @@ def get_latest_reviews(limit: int = 5) -> list[ReviewDetails]:
   with engine.connect() as conn:
     result = conn.execute(
       text("""
-          SELECT id, user_id, restaurant_name, headline,
-            rating AS burger_rating, date, meal_items, meal_cost,
-            review_text
+          SELECT id, user_id, restaurant_name , headline,
+            rating as burger_rating, date as review_date, meal_items, meal_cost, review_text
           FROM reviews
           ORDER BY created_at DESC
           LIMIT :limit
