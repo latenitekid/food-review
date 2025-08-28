@@ -3,7 +3,7 @@ export interface NewReviewDetails {
   restaurantName: string;
   headline: string;
   burgerRating: number;
-  date?: Date;
+  reviewDate?: Date;
   mealItems: string;
   mealCost: number;
   reviewText: string;

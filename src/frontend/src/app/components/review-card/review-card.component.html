@@ -18,8 +18,8 @@
 
     <p *ngIf="reviewDetails?.reviewText" class="mt-3">{{ reviewDetails?.reviewText }}</p>
 
-    <div class="card-footer mt-4" *ngIf="reviewDetails?.date">
-      <p class="text-sm text-gray-500">Reviewed on: {{ reviewDetails?.date | date:'mediumDate' }}</p>
+    <div class="card-footer mt-4" *ngIf="reviewDetails?.reviewDate">
+      <p class="text-sm text-gray-500">Reviewed on: {{ reviewDetails?.reviewDate | date:'mediumDate' }}</p>
     </div>
   </div>
 </div>
