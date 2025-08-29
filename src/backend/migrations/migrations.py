@@ -1,11 +1,13 @@
-import os
-import sys
+from configs.config_utils import get_postgres_server_details
 from datetime import datetime
+import os
 from sqlalchemy import create_engine, text, MetaData, Table, Column, String, DateTime
 from sqlalchemy.exc import ProgrammingError
+import sys
 
-# Database configuration
-DB_URL = "postgresql://foodreview:password@localhost:9999/foodreview"
+postgres_details = get_postgres_server_details("../../../config")
+  
+DB_URL = f"postgresql://{postgres_details['username']}:{postgres_details['password']}@{postgres_details['host']}:{postgres_details['port']}/foodreview"
 
 def create_migration_table(engine):
     """Create the migration_scripts table if it doesn't exist."""

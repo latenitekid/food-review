@@ -1,7 +1,10 @@
+from configs.config_utils import get_postgres_server_details
 from models.review_details import NewReviewDetails, ReviewDetails
 from sqlalchemy import create_engine, text
 
-engine  = create_engine("postgresql://foodreview:password@localhost:9999/foodreview")
+postgres_details = get_postgres_server_details("../../config")
+  
+engine  = create_engine(f"postgresql://{postgres_details['username']}:{postgres_details['password']}@{postgres_details['host']}:{postgres_details['port']}/foodreview")
 
 def add_new_review(review: NewReviewDetails):
   with engine.connect() as conn:
