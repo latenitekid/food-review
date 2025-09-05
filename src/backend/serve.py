@@ -1,8 +1,10 @@
 from models.review_details import NewReviewDetails, ReviewDetails
 import repositories.review
 from repositories.review import DEFAULT_RESTAURANT_NAME, DEFAULT_REVIEW_LIMIT, DEFAULT_USER_ID
-from fastapi import APIRouter, FastAPI
+import repositories.user
+from fastapi import APIRouter, FastAPI, Header
 from fastapi.middleware.cors import CORSMiddleware
+from typing import Annotated
 import uvicorn
 
 app = FastAPI()
@@ -34,6 +36,11 @@ async def get_latest_reviews(limit: int = repositories.review.DEFAULT_REVIEW_LIM
 async def get_best_reviews(limit: int = repositories.review.DEFAULT_REVIEW_LIMIT, user_id: int = DEFAULT_USER_ID, restaurant_name: str = DEFAULT_RESTAURANT_NAME) -> list[ReviewDetails]:
   best_reviews = repositories.review.get_best_reviews(limit, user_id, restaurant_name)
   return best_reviews
+
+@router.put("/user/login")
+async def put_user(authorization: Annotated[str | None, Header()] = None):
+  user_added = repositories.user.add_user(authorization)
+  return user_added
 
 app.include_router(router)
 
