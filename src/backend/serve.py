@@ -9,7 +9,7 @@ router = APIRouter()
 @router.post("/new-review")
 async def post_new_review(new_review_details: NewReviewDetails):
   repositories.review.add_new_review(new_review_details)
-  return {"test": f"thx for the review about {new_review_details.restaurant_name}"}
+  return {"test": f"thx for the review about {new_review_details.movie_name}"}
 
 @router.get("/latest-reviews")
 async def get_latest_reviews() -> list[ReviewDetails]:

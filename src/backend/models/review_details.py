@@ -8,12 +8,11 @@ class NewReviewDetails(BaseModel):
     alias_generator = to_camel
 
   user_id: int
-  restaurant_name: str
+  movie_name: str
+  theater: str
   headline: str
-  burger_rating: int
+  rating: int
   review_date: date
-  meal_items: str
-  meal_cost: float
   review_text: str
 
 class ReviewDetails(NewReviewDetails):

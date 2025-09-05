@@ -5,7 +5,7 @@ from sqlalchemy import create_engine, text, MetaData, Table, Column, String, Dat
 from sqlalchemy.exc import ProgrammingError
 
 # Database configuration
-DB_URL = "postgresql://foodreview:password@localhost:9999/foodreview"
+DB_URL = "postgresql://moviereview:password@localhost:9999/moviereview"
 
 def create_migration_table(engine):
     """Create the migration_scripts table if it doesn't exist."""
