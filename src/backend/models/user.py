@@ -1,4 +1,3 @@
-from datetime import date
 from pydantic import BaseModel
 from .model_utils import to_camel
 
