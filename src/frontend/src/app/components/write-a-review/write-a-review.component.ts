@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReviewCardComponent } from "../review-card/review-card.component";
 import { NewReviewDetails } from '../../models/review-details';
 import { FormsModule } from '@angular/forms';
+import { ReviewsService } from '../../services/reviews.service';
 
 @Component({
   selector: 'app-write-a-review',
@@ -17,7 +18,7 @@ export class WriteAReviewComponent implements OnInit {
   hoveredBurger: number = 0;
   newReviewDetails: NewReviewDetails;
 
-  constructor() {
+  constructor(private reviewsService: ReviewsService) {
     this.newReviewDetails = {
       restaurantName: "",
       headline: "",
@@ -25,7 +26,7 @@ export class WriteAReviewComponent implements OnInit {
       mealCost: 0,
       reviewText: "",
       burgerRating: 0,
-      date: new Date(),
+      reviewDate: new Date(),
       userId: 1
     };
   }
@@ -39,6 +40,13 @@ export class WriteAReviewComponent implements OnInit {
   }
 
   submitReview(): void {
-    console.log("Submitting review:", this.newReviewDetails);
+    this.reviewsService.submitNewReview(this.newReviewDetails).subscribe({
+      next: (response) => {
+        console.log('Review submitted successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error submitting review:', error);
+      }
+    });
   }
 }

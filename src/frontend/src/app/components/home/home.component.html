@@ -1,0 +1,5 @@
+<h2>Latest Reviews</h2>
+
+<div *ngFor="let review of reviews()">
+  <app-review-card class="flex-1" [reviewDetails]="review"></app-review-card>
+</div>
