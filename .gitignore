@@ -34,3 +34,7 @@
 
 # IDE files
 .vscode/
+
+# Configuration files
+# These files contain secrets and/or system-specific configuration info
+config/*.json
