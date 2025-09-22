@@ -1,4 +1,11 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'dont know yet'
+  apiBaseUrl: '',
+  authConfig: {
+    domain: '',
+    clientId: '',
+    redirect_uri: '',
+    audience: '',
+    scope: ''
+  }
 };
