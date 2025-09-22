@@ -20,11 +20,20 @@ export class ApiService {
     return this.http.post<T>(url, body);
   }
 
+  private put<T>(urlPath: string, body: any): Observable<T> {
+    const url = `${environment.apiBaseUrl}/${urlPath}`;
+    return this.http.put<T>(url, body);
+  }
+
   getLatestReviews(): Observable<ReviewDetails[]> {
     return this.get<ReviewDetails[]>('latest-reviews');
   }
 
   submitNewReview(reviewDetails: NewReviewDetails): Observable<any> {
     return this.post<any>('new-review', reviewDetails);
+  }
+
+  handleCallback(): Observable<any> {
+    return this.put<any>('user/login', undefined);
   }
 }
