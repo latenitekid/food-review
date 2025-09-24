@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 
 @Component({
-  selector: 'app-callback',
+  selector: 'app-auth-callback',
   standalone: true,
   template: '<div>Processing login...</div>'
 })
-export class CallbackComponent implements OnInit {
+export class AuthCallbackComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit() {
