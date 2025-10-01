@@ -5,7 +5,7 @@ from sqlalchemy import create_engine, text, MetaData, Table, Column, String, Dat
 from sqlalchemy.exc import ProgrammingError
 import sys
 
-postgres_details = get_postgres_server_details("../../../config")
+postgres_details = get_postgres_server_details("../../config")
   
 DB_URL = f"postgresql://{postgres_details['username']}:{postgres_details['password']}@{postgres_details['host']}:{postgres_details['port']}/foodreview"
 
@@ -65,7 +65,7 @@ def execute_migration(engine, script_path, script_name):
         print(f"Error executing {script_name}: {e}")
         return False
 
-def main():
+def execute_migrations():
     try:
         # Create database engine
         engine = create_engine(DB_URL)
@@ -94,6 +94,3 @@ def main():
     except Exception as e:
         print(f"Migration failed: {e}")
         sys.exit(1)
-
-if __name__ == "__main__":
-    main()
