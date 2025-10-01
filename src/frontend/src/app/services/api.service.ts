@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Signal } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 import { environment } from '../../environments/environment';
 import { NewReviewDetails, ReviewDetails } from '../models/review-details';
-import { Observable } from 'rxjs';
+import { mergeMap, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   private get<T>(urlPath: string): Observable<T> {
     const url = `${environment.apiBaseUrl}/${urlPath}`;
@@ -34,6 +35,6 @@ export class ApiService {
   }
 
   handleCallback(): Observable<any> {
-    return this.put<any>('user/login', undefined);
+    return this.put<any>('user/login', undefined)
   }
 }
