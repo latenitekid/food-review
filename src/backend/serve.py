@@ -1,3 +1,4 @@
+from configs.config_utils import get_config_as_dict
 from models.review_details import NewReviewDetails, ReviewDetails
 import repositories.review
 from repositories.review import DEFAULT_RESTAURANT_NAME, DEFAULT_REVIEW_LIMIT, DEFAULT_USER_ID
@@ -47,7 +48,9 @@ async def put_user(authorization: Annotated[str | None, Header()], response: Res
 app.include_router(router)
 
 def serve_app(production = False):
+  server_dict = get_config_as_dict("../../config")["backend_server"]
+  
   if(not production):
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host=server_dict["host"], port=server_dict["port"])
   else:
     print("Not ready for production")

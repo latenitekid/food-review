@@ -1,3 +1,4 @@
+from configs.config_utils import get_config_as_dict
 import jwt
 from jwt import PyJWKClient
 from jwt.exceptions import InvalidKeyError, InvalidTokenError
@@ -12,13 +13,14 @@ def get_user_info(auth_header: str):
   
   auth_token = str.split(auth_header, ' ')[1]
   jwks_client = PyJWKClient(JWKS_URL)
+  backend_server_dict = get_config_as_dict("../../config")["backend_server"]
+  backend_server_loc = f"http://{backend_server_dict['host']}:{backend_server_dict['port']}/"
   try:
     signing_key = jwks_client.get_signing_key_from_jwt(auth_token)
     jwt_info = jwt.decode(auth_token, 
                           algorithms=["RS256"],
                           key=signing_key.key,
-                          options={"verify_aud": False}, # Audience isn't verifying successfully, front-end not putting correct audience on the jwt or am I?
-                          audience="http://localhost:8000")
+                          audience=backend_server_loc)
     valid_user = True
   except URLError as e:
     print(f"Couldn't reach jwks client for signing key: {e}")
