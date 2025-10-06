@@ -1,0 +1,10 @@
+{
+    "postgres_server": {
+        "host": "hostname",
+        "port": 1
+    },
+    "backend_server": {
+        "host": "hostname",
+        "port": 1
+    }
+}
