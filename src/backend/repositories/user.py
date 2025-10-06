@@ -15,14 +15,14 @@ def add_user(auth_header: str):
     conn.execute(
       text("""
         INSERT INTO users
-          (user_id, username)
+          (auth_sub, username)
         VALUES
-          (:user_id, :username)
-        ON CONFLICT (user_id) DO NOTHING
+          (:auth_sub, :username)
+        ON CONFLICT (auth_sub) DO NOTHING
         """
       ),
       {
-        "user_id": newUser.user_id,
+        "auth_sub": newUser.auth_sub,
         "username": newUser.username
       }
     )
