@@ -6,7 +6,7 @@ def get_config_as_dict(config_dir):
         with open(f"{config_dir}/config.json") as f:
             config_data = json.load(f)
     except Exception as e:
-        print("Error: ", e)
+        print("Error accessing/parsing the config file: ", e)
     
     return config_data
     
@@ -16,7 +16,7 @@ def get_secrets_as_dict(config_dir):
         with open(f"{config_dir}/secrets.json") as f:
             secrets_data = json.load(f)
     except Exception as e:
-        print("Error: ", e)
+        print("Error accessing/parsing the secrets file: ", e)
     
     return secrets_data
 

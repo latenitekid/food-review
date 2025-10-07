@@ -1,8 +1,11 @@
+from configs.config_utils import get_config_as_dict
 from models.review_details import NewReviewDetails, ReviewDetails
 import repositories.review
 from repositories.review import DEFAULT_RESTAURANT_NAME, DEFAULT_REVIEW_LIMIT, DEFAULT_USER_ID
-from fastapi import APIRouter, FastAPI
+import repositories.user
+from fastapi import APIRouter, FastAPI, Header, Response, status
 from fastapi.middleware.cors import CORSMiddleware
+from typing import Annotated
 import uvicorn
 
 app = FastAPI()
@@ -35,7 +38,19 @@ async def get_best_reviews(limit: int = repositories.review.DEFAULT_REVIEW_LIMIT
   best_reviews = repositories.review.get_best_reviews(limit, user_id, restaurant_name)
   return best_reviews
 
+@router.put("/user/login")
+async def put_user(authorization: Annotated[str | None, Header()], response: Response):
+  user_added = repositories.user.add_user(authorization)
+  if(not user_added):
+    response.status_code = status.HTTP_401_UNAUTHORIZED
+  return
+
 app.include_router(router)
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+def serve_app(production = False):
+  server_dict = get_config_as_dict("../../config")["backend_server"]
+  
+  if(not production):
+    uvicorn.run(app, host=server_dict["host"], port=server_dict["port"])
+  else:
+    print("Not ready for production")

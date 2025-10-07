@@ -37,4 +37,5 @@
 
 # Configuration files
 # These files contain secrets and/or system-specific configuration info
-config/*.json
+config/config.json
+config/secrets.json
